@@ -1,32 +1,24 @@
 package models
 
 import (
+	"fmt"
 	"log"
-	"time"
 
-	"github.com/go-sql-driver/mysql"
 	"github.com/leepuppychow/employees_API/database"
 )
 
 type Employee struct {
-	EmployeeID int       `json:"employee_id"`
-	BirthDate  time.Time `json:"birth_date"`
-	FirstName  string    `json:"first_name"`
-	LastName   string    `json:"last_name"`
-	Gender     string    `json:"gender"`
-	HireDate   time.Time `json:"hire_date"`
+	EmployeeID int    `json:"employee_id"`
+	BirthDate  string `json:"birth_date"`
+	FirstName  string `json:"first_name"`
+	LastName   string `json:"last_name"`
+	Gender     string `json:"gender"`
+	HireDate   string `json:"hire_date"`
 }
 
 func AllEmployees() ([]Employee, error) {
 	var employees []Employee
-	var (
-		emp_no     int
-		birth_date mysql.NullTime
-		first_name string
-		last_name  string
-		gender     string
-		hire_date  mysql.NullTime
-	)
+	var employee Employee
 
 	q := "SELECT * FROM employees"
 	rows, err := database.DB.Query(q)
@@ -36,25 +28,17 @@ func AllEmployees() ([]Employee, error) {
 	defer rows.Close()
 	for rows.Next() {
 		err = rows.Scan(
-			&emp_no,
-			&birth_date,
-			&first_name,
-			&last_name,
-			&gender,
-			&hire_date,
+			&employee.EmployeeID,
+			&employee.BirthDate,
+			&employee.FirstName,
+			&employee.LastName,
+			&employee.Gender,
+			&employee.HireDate,
 		)
 		if err != nil {
 			log.Println(err)
 		}
-		emp := Employee{
-			EmployeeID: emp_no,
-			BirthDate:  birth_date.Time,
-			FirstName:  first_name,
-			LastName:   last_name,
-			Gender:     gender,
-			HireDate:   hire_date.Time,
-		}
-		employees = append(employees, emp)
+		employees = append(employees, employee)
 	}
 	if err != nil {
 		return employees, err
