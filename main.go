@@ -15,9 +15,8 @@ func main() {
 	address := host + ":" + port
 
 	router := routes.NewRouter()
-	log.Println("Server running on port:", port)
 	database.Connect("employees")
+	log.Println("Server running at:", address)
 
 	log.Fatal(http.ListenAndServe(address, router))
-	log.Println("Server running at:", address)
 }

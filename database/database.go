@@ -8,12 +8,14 @@ import (
 	_ "github.com/go-sql-driver/mysql"
 )
 
-func Connect(database string) *sql.DB {
-	db, err := sql.Open("mysql", DBConnection(database))
+var DB *sql.DB
+
+func Connect(database string) {
+	DB, _ := sql.Open("mysql", DBConnection(database))
+	err := DB.Ping()
 	if err != nil {
 		log.Fatal(err)
 	}
-	return db
 }
 
 func DBConnection(database string) string {
