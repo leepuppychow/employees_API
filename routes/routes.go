@@ -20,7 +20,7 @@ var routes = Routes{
 	{"PapersIndex", "GET", "/employees", controllers.EmployeesIndex},
 }
 
-func NewRouter(useAuth bool) *mux.Router {
+func NewRouter() *mux.Router {
 	router := mux.NewRouter().StrictSlash(true)
 	for _, route := range routes {
 		router.
