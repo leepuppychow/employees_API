@@ -8,16 +8,16 @@ import (
 	_ "github.com/go-sql-driver/mysql"
 )
 
-func Connect() *sql.DB {
-	db, err := sql.Open("mysql", DBConnection("employees"))
+func Connect(database string) *sql.DB {
+	db, err := sql.Open("mysql", DBConnection(database))
 	if err != nil {
 		log.Fatal(err)
 	}
 	return db
 }
 
-func DBConnection(dbName string) string {
+func DBConnection(database string) string {
 	user := os.Getenv("GO_TEST_USER")
 	password := os.Getenv("GO_TEST_PASS")
-	return user + ":" + password + "@/" + dbName
+	return user + ":" + password + "@/" + database
 }
