@@ -2,7 +2,7 @@
 
 1. Clone database repo from: https://github.com/datacharmer/test_db
 2. run `mysql < employees.sql`
-3. Set up environment variables (Example for Linux environment):
+3. Set up environment variables (Example for Linux environment):\
   `export GO_TEST_USER=root`\
   `export GO_TEST_PASS=password`\
   `export GO_TEST_HOST=localhost`\
