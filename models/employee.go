@@ -85,3 +85,38 @@ func AllEmployeesComplete() ([]Employee, error) {
 		return employees, nil
 	}
 }
+
+func EmployeesOfDepartment(departmentId string) ([]Employee, error) {
+	var employees []Employee
+	var employee Employee
+	q := `
+		SELECT DISTINCT employees.* FROM employees
+		INNER JOIN dept_emp ON employees.emp_no = dept_emp.emp_no
+		WHERE dept_no = ?
+	`
+	rows, err := database.DB.Query(q, departmentId)
+	if err != nil {
+		log.Println("Error with employees of department query", err)
+	}
+	defer rows.Close()
+	for rows.Next() {
+		err = rows.Scan(
+			&employee.EmployeeId,
+			&employee.BirthDate,
+			&employee.FirstName,
+			&employee.LastName,
+			&employee.Gender,
+			&employee.HireDate,
+		)
+		if err != nil {
+			log.Println(err)
+		}
+		employees = append(employees, employee)
+	}
+	if err != nil {
+		return employees, err
+	} else {
+		log.Println("Successful GET /employees-by-department")
+		return employees, nil
+	}
+}
