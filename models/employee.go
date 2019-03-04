@@ -7,7 +7,7 @@ import (
 )
 
 type Employee struct {
-	EmployeeID int    `json:"employee_id"`
+	EmployeeId int    `json:"employee_id"`
 	BirthDate  string `json:"birth_date"`
 	FirstName  string `json:"first_name"`
 	LastName   string `json:"last_name"`
@@ -27,7 +27,7 @@ func AllEmployees() ([]Employee, error) {
 	defer rows.Close()
 	for rows.Next() {
 		err = rows.Scan(
-			&employee.EmployeeID,
+			&employee.EmployeeId,
 			&employee.BirthDate,
 			&employee.FirstName,
 			&employee.LastName,
