@@ -38,7 +38,7 @@ func AllManagers() ([]Manager, error) {
 	if err != nil {
 		return managers, err
 	} else {
-		log.Println("Sucessful GET /departmentManagers")
+		log.Println("Successful GET /departmentManagers")
 		return managers, nil
 	}
 }

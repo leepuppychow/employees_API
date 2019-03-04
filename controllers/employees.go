@@ -11,3 +11,8 @@ func EmployeesIndex(w http.ResponseWriter, r *http.Request) {
 	data, err := models.AllEmployees()
 	helpers.WriteResponse(data, err, 400, w)
 }
+
+func EmployeesComplete(w http.ResponseWriter, r *http.Request) {
+	data, err := models.AllEmployeesComplete()
+	helpers.WriteResponse(data, err, 400, w)
+}

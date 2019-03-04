@@ -13,6 +13,8 @@ type Employee struct {
 	LastName   string `json:"last_name"`
 	Gender     string `json:"gender"`
 	HireDate   string `json:"hire_date"`
+	Salary     string `json:"salary"`
+	Title      string `json:"title"`
 }
 
 func AllEmployees() ([]Employee, error) {
@@ -42,7 +44,44 @@ func AllEmployees() ([]Employee, error) {
 	if err != nil {
 		return employees, err
 	} else {
-		log.Println("Sucessful GET /employees")
+		log.Println("Successful GET /employees")
+		return employees, nil
+	}
+}
+
+func AllEmployeesComplete() ([]Employee, error) {
+	var employees []Employee
+	var employee Employee
+	q := `
+		SELECT employees.*, title, salary FROM employees
+		INNER JOIN titles ON employees.emp_no = titles.emp_no
+		INNER JOIN salaries ON employees.emp_no = salaries.emp_no
+	`
+	rows, err := database.DB.Query(q)
+	if err != nil {
+		log.Println("Error with all employees query", err)
+	}
+	defer rows.Close()
+	for rows.Next() {
+		err = rows.Scan(
+			&employee.EmployeeId,
+			&employee.BirthDate,
+			&employee.FirstName,
+			&employee.LastName,
+			&employee.Gender,
+			&employee.HireDate,
+			&employee.Title,
+			&employee.Salary,
+		)
+		if err != nil {
+			log.Println(err)
+		}
+		employees = append(employees, employee)
+	}
+	if err != nil {
+		return employees, err
+	} else {
+		log.Println("Successful GET /employees-complete")
 		return employees, nil
 	}
 }
