@@ -19,10 +19,10 @@ type Routes []Route
 var routes = Routes{
 	{"EmployeesIndex", "GET", "/employees", controllers.EmployeesIndex},
 	{"EmployeesComplete", "GET", "/employees-complete", controllers.EmployeesComplete},
+	{"EmployeesOfDepartment", "GET", "/employees-by-department/{departmentId}", controllers.EmployeesOfDepartment},
 	{"DepartmentsIndex", "GET", "/departments", controllers.DepartmentsIndex},
 	{"DepartmentOfEmployee", "GET", "/department-by-employee/{employeeId}", controllers.DepartmentOfEmployee},
 	{"ManagersIndex", "GET", "/departmentManagers", controllers.ManagersIndex},
-	{"SalariesIndex", "GET", "/salaries", controllers.SalariesIndex},
 	{"SalariesIndex", "GET", "/salaries", controllers.SalariesIndex},
 }
 
