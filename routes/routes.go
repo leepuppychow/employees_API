@@ -18,6 +18,7 @@ type Routes []Route
 
 var routes = Routes{
 	{"PapersIndex", "GET", "/employees", controllers.EmployeesIndex},
+	{"PapersIndex", "GET", "/departments", controllers.DepartmentsIndex},
 }
 
 func NewRouter() *mux.Router {
