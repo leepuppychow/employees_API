@@ -34,7 +34,7 @@ func AllDepartments() ([]Department, error) {
 	if err != nil {
 		return depts, err
 	} else {
-		log.Println("Sucessful GET /departments")
+		log.Println("Successful GET /departments")
 		return depts, nil
 	}
 }

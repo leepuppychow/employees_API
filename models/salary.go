@@ -38,7 +38,7 @@ func AllSalaries() ([]Salary, error) {
 	if err != nil {
 		return salaries, err
 	} else {
-		log.Println("Sucessful GET /salaries")
+		log.Println("Successful GET /salaries")
 		return salaries, nil
 	}
 }

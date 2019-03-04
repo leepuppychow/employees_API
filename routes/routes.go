@@ -17,7 +17,8 @@ type Route struct {
 type Routes []Route
 
 var routes = Routes{
-	{"PapersIndex", "GET", "/employees", controllers.EmployeesIndex},
+	{"EmployeesIndex", "GET", "/employees", controllers.EmployeesIndex},
+	{"EmployeesComplete", "GET", "/employees-complete", controllers.EmployeesComplete},
 	{"DepartmentsIndex", "GET", "/departments", controllers.DepartmentsIndex},
 	{"ManagersIndex", "GET", "/departmentManagers", controllers.ManagersIndex},
 	{"SalariesIndex", "GET", "/salaries", controllers.SalariesIndex},
