@@ -38,3 +38,35 @@ func AllDepartments() ([]Department, error) {
 		return depts, nil
 	}
 }
+
+func DepartmentOfEmployee(employeeId string) ([]Department, error) {
+	var depts []Department
+	var d Department
+
+	q := `
+		SELECT departments.* FROM departments
+		INNER JOIN dept_emp ON departments.dept_no = dept_emp.dept_no
+		WHERE emp_no=?
+	`
+	rows, err := database.DB.Query(q, employeeId)
+	if err != nil {
+		log.Println("Error with department by employee query", err)
+	}
+	defer rows.Close()
+	for rows.Next() {
+		err = rows.Scan(
+			&d.DepartmentId,
+			&d.DepartmentName,
+		)
+		if err != nil {
+			log.Println(err)
+		}
+		depts = append(depts, d)
+	}
+	if err != nil {
+		return depts, err
+	} else {
+		log.Println("Successful GET /departments-by-employee/:id")
+		return depts, nil
+	}
+}
