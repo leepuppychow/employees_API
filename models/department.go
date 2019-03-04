@@ -7,8 +7,8 @@ import (
 )
 
 type Department struct {
-	Id   string `json:"department_id"`
-	Name string `json:"department_name"`
+	DepartmentId   string `json:"department_id"`
+	DepartmentName string `json:"department_name"`
 }
 
 func AllDepartments() ([]Department, error) {
@@ -23,8 +23,8 @@ func AllDepartments() ([]Department, error) {
 	defer rows.Close()
 	for rows.Next() {
 		err = rows.Scan(
-			&d.Id,
-			&d.Name,
+			&d.DepartmentId,
+			&d.DepartmentName,
 		)
 		if err != nil {
 			log.Println(err)
