@@ -15,10 +15,8 @@ func main() {
 }
 
 func startServer() {
-	host := os.Getenv("GO_TEST_HOST")
 	port := os.Getenv("GO_TEST_PORT")
-	address := host + ":" + port
 	router := routes.NewRouter()
-	log.Println("Server running at:", address)
-	log.Fatal(http.ListenAndServe(address, router))
+	log.Println("Server running at port:", port)
+	log.Fatal(http.ListenAndServe(":"+port, router))
 }
