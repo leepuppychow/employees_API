@@ -2,7 +2,6 @@ package database
 
 import (
 	"database/sql"
-	"fmt"
 	"log"
 	"os"
 
@@ -13,8 +12,6 @@ var DB *sql.DB
 
 func Connect(database string) {
 	db, err := sql.Open("mysql", dbConnection(database))
-
-	fmt.Println(db)
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -23,7 +20,7 @@ func Connect(database string) {
 
 func dbConnection(database string) string {
 	user := os.Getenv("GO_TEST_USER")
-	password := os.Getenv("GO_TEST_PASS")
+	password := os.Getenv("DB_HOST")
 	host := os.Getenv("GO_TEST_HOST")
 
 	return user + ":" + password + "@tcp(" + host + ":3306)" + "/" + database
